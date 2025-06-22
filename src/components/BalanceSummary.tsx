@@ -62,7 +62,7 @@ export default function BalanceSummary({ balances, participants }: BalanceSummar
 
   if (balances.length === 0) {
     return (
-      <div className="bg-gray-800 rounded-xl p-8 border border-gray-700 text-center">
+      <div className="card-gradient rounded-2xl p-8 text-center">
         <Calculator className="w-16 h-16 text-gray-600 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-white mb-2">No balances to show</h3>
         <p className="text-gray-400">Add some expenses to see who owes whom.</p>
@@ -76,8 +76,8 @@ export default function BalanceSummary({ balances, participants }: BalanceSummar
   return (
     <div className="space-y-6">
       {/* Individual Balances */}
-      <div className="bg-gray-800 rounded-xl border border-gray-700">
-        <div className="p-6 border-b border-gray-700">
+      <div className="card-gradient rounded-2xl">
+        <div className="p-6 border-b border-white/10">
           <h2 className="text-xl font-semibold text-white flex items-center gap-2">
             <Calculator className="w-5 h-5" />
             Individual Balances
@@ -89,7 +89,7 @@ export default function BalanceSummary({ balances, participants }: BalanceSummar
             {balances.map((balance) => (
               <div
                 key={balance.participantId}
-                className="flex items-center justify-between p-4 bg-gray-700 rounded-xl"
+                className="flex items-center justify-between p-4 bg-white/5 rounded-xl"
               >
                 <div className="flex items-center gap-3">
                   <div className={`w-3 h-3 rounded-full ${
@@ -119,8 +119,8 @@ export default function BalanceSummary({ balances, participants }: BalanceSummar
 
       {/* Settlement Suggestions */}
       {hasBalances && settlements.length > 0 && (
-        <div className="bg-gray-800 rounded-xl border border-gray-700">
-          <div className="p-6 border-b border-gray-700">
+        <div className="card-gradient rounded-2xl">
+          <div className="p-6 border-b border-white/10">
             <h2 className="text-xl font-semibold text-white flex items-center gap-2">
               <TrendingUp className="w-5 h-5" />
               Suggested Settlements
@@ -164,7 +164,7 @@ export default function BalanceSummary({ balances, participants }: BalanceSummar
       )}
 
       {!hasBalances && (
-        <div className="bg-gray-800 rounded-xl p-8 border border-gray-700 text-center">
+        <div className="card-gradient rounded-2xl p-8 text-center">
           <div className="bg-emerald-500 w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-4">
             <Minus className="w-8 h-8 text-white" />
           </div>

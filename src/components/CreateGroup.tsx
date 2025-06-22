@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { ArrowLeft, Users, Sparkles, Zap } from 'lucide-react';
+import { ArrowLeft, Users, Sparkles } from 'lucide-react';
 
 interface CreateGroupProps {
   onCreateGroup: (groupName: string, creatorName: string) => void;
@@ -20,39 +20,39 @@ export default function CreateGroup({ onCreateGroup, onBack }: CreateGroupProps)
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-emerald-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+    <div className="min-h-screen gradient-bg relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative z-10">
-        <div className="max-w-3xl mx-auto">
+      <div className="container mx-auto px-6 py-16 relative z-10">
+        <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="flex items-center mb-12">
             <button
               onClick={onBack}
-              className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 p-4 rounded-2xl transition-all duration-300 mr-6 shadow-xl hover:shadow-2xl hover:transform hover:scale-105"
+              className="btn-secondary p-3 rounded-xl mr-6"
             >
-              <ArrowLeft className="w-6 h-6 text-white" />
+              <ArrowLeft className="w-5 h-5" />
             </button>
-            <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-emerald-400">
-              Create New Group
+            <h1 className="text-4xl md:text-5xl font-bold text-white">
+              Create Group
             </h1>
           </div>
 
           {/* Form Card */}
-          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-12 border border-gray-700/50 shadow-2xl">
-            <div className="flex items-center justify-center mb-12">
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 p-6 rounded-3xl shadow-2xl shadow-emerald-500/25">
-                <Users className="w-12 h-12 text-white" />
+          <div className="card-gradient p-8 md:p-12 rounded-3xl">
+            <div className="flex items-center justify-center mb-8">
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-6 rounded-2xl">
+                <Users className="w-8 h-8 text-white" />
               </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
-                <label htmlFor="groupName" className="block text-lg font-semibold text-gray-300 mb-4">
+                <label htmlFor="groupName" className="block text-sm font-medium text-gray-300 mb-3">
                   Group Name
                 </label>
                 <input
@@ -61,13 +61,13 @@ export default function CreateGroup({ onCreateGroup, onBack }: CreateGroupProps)
                   value={groupName}
                   onChange={(e) => setGroupName(e.target.value)}
                   placeholder="e.g., Weekend Trip, Dinner Party, House Expenses"
-                  className="w-full bg-gradient-to-r from-gray-700/50 to-gray-800/50 backdrop-blur-sm border border-gray-600/50 rounded-2xl px-6 py-4 text-white text-xl placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300"
+                  className="w-full input-field text-lg"
                   required
                 />
               </div>
 
               <div>
-                <label htmlFor="creatorName" className="block text-lg font-semibold text-gray-300 mb-4">
+                <label htmlFor="creatorName" className="block text-sm font-medium text-gray-300 mb-3">
                   Your Name
                 </label>
                 <input
@@ -76,7 +76,7 @@ export default function CreateGroup({ onCreateGroup, onBack }: CreateGroupProps)
                   value={creatorName}
                   onChange={(e) => setCreatorName(e.target.value)}
                   placeholder="Enter your name"
-                  className="w-full bg-gradient-to-r from-gray-700/50 to-gray-800/50 backdrop-blur-sm border border-gray-600/50 rounded-2xl px-6 py-4 text-white text-xl placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-emerald-500/50 focus:border-emerald-500/50 transition-all duration-300"
+                  className="w-full input-field text-lg"
                   required
                 />
               </div>
@@ -84,36 +84,31 @@ export default function CreateGroup({ onCreateGroup, onBack }: CreateGroupProps)
               <button
                 type="submit"
                 disabled={!groupName.trim() || !creatorName.trim()}
-                className="w-full bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white py-6 rounded-2xl font-bold text-xl flex items-center justify-center gap-4 transition-all duration-300 shadow-2xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:transform hover:scale-105"
+                className="w-full btn-primary py-4 text-lg glow-blue disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Sparkles className="w-6 h-6" />
                 Create Group
               </button>
             </form>
 
-            <div className="mt-12 p-8 bg-gradient-to-r from-gray-700/30 to-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-600/30">
-              <h3 className="text-white font-bold text-xl mb-4 flex items-center gap-2">
-                <Zap className="w-5 h-5" />
+            <div className="mt-12 card-gradient p-6 rounded-2xl border border-blue-500/20">
+              <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
+                <Sparkles className="w-5 h-5 text-yellow-400" />
                 What happens next?
               </h3>
-              <ul className="text-gray-300 space-y-3 text-lg">
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                  Your group will get a unique shareable link
-                </li>
-                <li className="flex items-center gap-3">
+              <div className="space-y-3 text-gray-300">
+                <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                  Invite friends by sharing the link
-                </li>
-                <li className="flex items-center gap-3">
+                  <span>Get a unique group link to share</span>
+                </div>
+                <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  Start adding expenses and split them fairly
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                  Track who owes whom in real-time
-                </li>
-              </ul>
+                  <span>Invite friends to join your group</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Start adding and splitting expenses</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

@@ -9,7 +9,7 @@ interface ExpenseListProps {
 export default function ExpenseList({ group }: ExpenseListProps) {
   if (group.expenses.length === 0) {
     return (
-      <div className="bg-gray-800 rounded-xl p-8 border border-gray-700 text-center">
+      <div className="card-gradient rounded-2xl p-8 text-center">
         <Receipt className="w-16 h-16 text-gray-600 mx-auto mb-4" />
         <h3 className="text-xl font-semibold text-white mb-2">No expenses yet</h3>
         <p className="text-gray-400">Start by adding your first expense to the group.</p>
@@ -22,15 +22,15 @@ export default function ExpenseList({ group }: ExpenseListProps) {
   );
 
   return (
-    <div className="bg-gray-800 rounded-xl border border-gray-700">
-      <div className="p-6 border-b border-gray-700">
+    <div className="card-gradient rounded-2xl">
+      <div className="p-6 border-b border-white/10">
         <h2 className="text-xl font-semibold text-white flex items-center gap-2">
           <Receipt className="w-5 h-5" />
           All Expenses ({group.expenses.length})
         </h2>
       </div>
       
-      <div className="divide-y divide-gray-700">
+      <div className="divide-y divide-white/10">
         {sortedExpenses.map((expense) => {
           const payer = group.participants.find(p => p.id === expense.paidBy);
           const splitParticipants = expense.splitBetween.map(split => {
@@ -39,7 +39,7 @@ export default function ExpenseList({ group }: ExpenseListProps) {
           });
           
           return (
-            <div key={expense.id} className="p-6 hover:bg-gray-700/50 transition-colors">
+            <div key={expense.id} className="p-6 hover:bg-white/5 transition-colors">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-4">
                 <div className="flex-1">
                   <div className="flex items-start justify-between mb-2">
@@ -63,13 +63,13 @@ export default function ExpenseList({ group }: ExpenseListProps) {
                 </div>
               </div>
               
-              <div className="mt-4 pt-4 border-t border-gray-700">
+              <div className="mt-4 pt-4 border-t border-white/10">
                 <div className="flex flex-wrap gap-2">
                   <span className="text-gray-400 text-sm">Split between:</span>
                   {splitParticipants.map((participant, index) => (
                     <span
                       key={participant.id}
-                      className="inline-flex items-center gap-1 bg-gray-700 text-gray-300 px-3 py-1 rounded-full text-sm"
+                      className="inline-flex items-center gap-1 bg-white/10 text-gray-300 px-3 py-1 rounded-full text-sm"
                     >
                       {participant.name}
                       <span className="text-emerald-400 font-medium">

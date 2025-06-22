@@ -84,23 +84,31 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-gray-900">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen gradient-bg relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+      </div>
+
+      <div className="container mx-auto px-6 py-12 relative z-10">
         <div className="max-w-3xl mx-auto">
           {/* Header */}
-          <div className="flex items-center mb-8">
+          <div className="flex items-center mb-12">
             <button
               onClick={onBack}
-              className="bg-gray-700 hover:bg-gray-600 p-3 rounded-xl transition-colors mr-4"
+              className="btn-secondary p-3 rounded-xl mr-6"
             >
-              <ArrowLeft className="w-5 h-5 text-white" />
+              <ArrowLeft className="w-5 h-5" />
             </button>
-            <h1 className="text-3xl font-bold text-white">Add Expense</h1>
+            <h1 className="text-3xl md:text-4xl font-bold text-white">
+              Add Expense
+            </h1>
           </div>
 
           <form onSubmit={handleSubmit} className="space-y-8">
-            {/* Basic Info */}
-            <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            {/* Expense Details */}
+            <div className="card-gradient p-6 rounded-2xl">
               <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
                 <DollarSign className="w-5 h-5" />
                 Expense Details
@@ -108,7 +116,7 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
               
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
                     Description
                   </label>
                   <input
@@ -116,13 +124,13 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
                     value={description}
                     onChange={(e) => setDescription(e.target.value)}
                     placeholder="What was this expense for?"
-                    className="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className="w-full input-field"
                     required
                   />
                 </div>
                 
                 <div>
-                  <label className="block text-sm font-medium text-gray-300 mb-2">
+                  <label className="block text-sm font-medium text-gray-300 mb-3">
                     Amount ($)
                   </label>
                   <input
@@ -131,24 +139,24 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
                     value={amount}
                     onChange={(e) => setAmount(e.target.value)}
                     placeholder="0.00"
-                    className="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                    className="w-full input-field font-mono"
                     required
                   />
                 </div>
               </div>
 
               <div className="mt-6">
-                <label className="block text-sm font-medium text-gray-300 mb-2">
-                  Paid by
+                <label className="block text-sm font-medium text-gray-300 mb-3">
+                  Who paid?
                 </label>
                 <select
                   value={paidBy}
                   onChange={(e) => setPaidBy(e.target.value)}
-                  className="w-full bg-gray-700 border border-gray-600 rounded-xl px-4 py-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                  className="w-full input-field"
                   required
                 >
                   {group.participants.map(participant => (
-                    <option key={participant.id} value={participant.id}>
+                    <option key={participant.id} value={participant.id} className="bg-gray-800">
                       {participant.name}
                     </option>
                   ))}
@@ -156,8 +164,8 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
               </div>
             </div>
 
-            {/* Split Options */}
-            <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+            {/* Split Configuration */}
+            <div className="card-gradient p-6 rounded-2xl">
               <h2 className="text-xl font-semibold text-white mb-6 flex items-center gap-2">
                 <Calculator className="w-5 h-5" />
                 Split Between
@@ -167,10 +175,10 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
                 <button
                   type="button"
                   onClick={() => setSplitType('equal')}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-xl font-medium transition-all ${
                     splitType === 'equal'
-                      ? 'bg-emerald-500 text-white'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                      : 'bg-white/10 text-gray-400 hover:text-white'
                   }`}
                 >
                   Split Equally
@@ -178,10 +186,10 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
                 <button
                   type="button"
                   onClick={() => setSplitType('custom')}
-                  className={`px-4 py-2 rounded-lg font-medium transition-colors ${
+                  className={`px-4 py-2 rounded-xl font-medium transition-all ${
                     splitType === 'custom'
-                      ? 'bg-emerald-500 text-white'
-                      : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                      ? 'bg-gradient-to-r from-blue-600 to-purple-600 text-white'
+                      : 'bg-white/10 text-gray-400 hover:text-white'
                   }`}
                 >
                   Custom Amounts
@@ -192,20 +200,20 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
                 {group.participants.map(participant => (
                   <div
                     key={participant.id}
-                    className={`flex items-center justify-between p-4 rounded-xl border transition-colors ${
+                    className={`flex items-center justify-between p-4 rounded-xl border transition-all ${
                       selectedParticipants.includes(participant.id)
-                        ? 'bg-emerald-500/10 border-emerald-500'
-                        : 'bg-gray-700 border-gray-600'
+                        ? 'bg-blue-500/10 border-blue-500/30'
+                        : 'bg-white/5 border-white/10'
                     }`}
                   >
                     <div className="flex items-center gap-3">
                       <button
                         type="button"
                         onClick={() => handleParticipantToggle(participant.id)}
-                        className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-colors ${
+                        className={`w-5 h-5 rounded border-2 flex items-center justify-center transition-all ${
                           selectedParticipants.includes(participant.id)
-                            ? 'bg-emerald-500 border-emerald-500'
-                            : 'border-gray-400'
+                            ? 'bg-blue-500 border-blue-500'
+                            : 'border-gray-500'
                         }`}
                       >
                         {selectedParticipants.includes(participant.id) && (
@@ -219,7 +227,7 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
                       <div className="flex items-center gap-2">
                         <span className="text-gray-400">$</span>
                         {splitType === 'equal' ? (
-                          <span className="text-white font-mono">
+                          <span className="text-blue-400 font-mono font-semibold">
                             {totalAmount > 0 ? (totalAmount / selectedParticipants.length).toFixed(2) : '0.00'}
                           </span>
                         ) : (
@@ -229,7 +237,7 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
                             value={customAmounts[participant.id] || ''}
                             onChange={(e) => handleCustomAmountChange(participant.id, e.target.value)}
                             placeholder="0.00"
-                            className="w-20 bg-gray-600 border border-gray-500 rounded px-2 py-1 text-white text-right font-mono focus:outline-none focus:ring-1 focus:ring-emerald-500"
+                            className="w-20 bg-white/10 border border-white/20 rounded px-2 py-1 text-white text-right font-mono focus:outline-none focus:ring-2 focus:ring-blue-500/50"
                           />
                         )}
                       </div>
@@ -239,14 +247,14 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
               </div>
 
               {splitType === 'custom' && totalAmount > 0 && (
-                <div className="mt-4 p-4 bg-gray-700 rounded-xl">
+                <div className="mt-6 card-gradient p-4 rounded-xl border border-white/10">
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-300">Total Amount:</span>
                     <span className="text-white font-mono">${totalAmount.toFixed(2)}</span>
                   </div>
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-300">Split Total:</span>
-                    <span className={`font-mono ${isValidSplit ? 'text-emerald-400' : 'text-red-400'}`}>
+                    <span className={`font-mono ${isValidSplit ? 'text-green-400' : 'text-red-400'}`}>
                       ${totalSplit.toFixed(2)}
                     </span>
                   </div>
@@ -269,9 +277,8 @@ export default function AddExpense({ group, onAddExpense, onBack, currentUser }:
                 selectedParticipants.length === 0 || 
                 (splitType === 'custom' && !isValidSplit)
               }
-              className="w-full bg-emerald-500 hover:bg-emerald-600 disabled:bg-gray-600 disabled:cursor-not-allowed text-white py-4 rounded-xl font-semibold flex items-center justify-center gap-3 transition-colors shadow-lg hover:shadow-emerald-500/25"
+              className="w-full btn-primary py-4 text-lg glow-green disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <DollarSign className="w-5 h-5" />
               Add Expense
             </button>
           </form>

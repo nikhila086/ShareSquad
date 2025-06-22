@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Users, Link, Sparkles } from 'lucide-react';
+import { ArrowLeft, Users, Link } from 'lucide-react';
 
 interface JoinGroupProps {
   onJoinGroup: (groupId: string, participantName: string) => void;
@@ -32,39 +32,39 @@ export default function JoinGroup({ onJoinGroup, onBack, defaultName = '', prefi
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
+    <div className="min-h-screen gradient-bg relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-green-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative z-10">
-        <div className="max-w-3xl mx-auto">
+      <div className="container mx-auto px-6 py-16 relative z-10">
+        <div className="max-w-2xl mx-auto">
           {/* Header */}
           <div className="flex items-center mb-12">
             <button
               onClick={onBack}
-              className="bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 p-4 rounded-2xl transition-all duration-300 mr-6 shadow-xl hover:shadow-2xl hover:transform hover:scale-105"
+              className="btn-secondary p-3 rounded-xl mr-6"
             >
-              <ArrowLeft className="w-6 h-6 text-white" />
+              <ArrowLeft className="w-5 h-5" />
             </button>
-            <h1 className="text-5xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white to-blue-400">
+            <h1 className="text-4xl md:text-5xl font-bold text-white">
               Join Group
             </h1>
           </div>
 
           {/* Form Card */}
-          <div className="bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm rounded-3xl p-12 border border-gray-700/50 shadow-2xl">
-            <div className="flex items-center justify-center mb-12">
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 p-6 rounded-3xl shadow-2xl shadow-blue-500/25">
-                <Link className="w-12 h-12 text-white" />
+          <div className="card-gradient p-8 md:p-12 rounded-3xl">
+            <div className="flex items-center justify-center mb-8">
+              <div className="bg-gradient-to-r from-green-600 to-blue-600 p-6 rounded-2xl">
+                <Link className="w-8 h-8 text-white" />
               </div>
             </div>
 
             <form onSubmit={handleSubmit} className="space-y-8">
               <div>
-                <label htmlFor="groupId" className="block text-lg font-semibold text-gray-300 mb-4">
+                <label htmlFor="groupId" className="block text-sm font-medium text-gray-300 mb-3">
                   Group ID
                 </label>
                 <input
@@ -72,18 +72,18 @@ export default function JoinGroup({ onJoinGroup, onBack, defaultName = '', prefi
                   id="groupId"
                   value={groupId}
                   onChange={(e) => setGroupId(e.target.value)}
-                  placeholder="Enter the 6-character group ID"
-                  className="w-full bg-gradient-to-r from-gray-700/50 to-gray-800/50 backdrop-blur-sm border border-gray-600/50 rounded-2xl px-6 py-4 text-white text-xl placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300 uppercase"
+                  placeholder="Enter 6-character group ID"
+                  className="w-full input-field text-lg font-mono uppercase tracking-wider"
                   maxLength={6}
                   required
                 />
-                <p className="text-gray-400 text-sm mt-3">
+                <p className="text-gray-500 text-sm mt-2">
                   Group IDs are 6 characters long (e.g., ABC123)
                 </p>
               </div>
 
               <div>
-                <label htmlFor="participantName" className="block text-lg font-semibold text-gray-300 mb-4">
+                <label htmlFor="participantName" className="block text-sm font-medium text-gray-300 mb-3">
                   Your Name
                 </label>
                 <input
@@ -92,50 +92,45 @@ export default function JoinGroup({ onJoinGroup, onBack, defaultName = '', prefi
                   value={participantName}
                   onChange={(e) => setParticipantName(e.target.value)}
                   placeholder="Enter your name"
-                  className="w-full bg-gradient-to-r from-gray-700/50 to-gray-800/50 backdrop-blur-sm border border-gray-600/50 rounded-2xl px-6 py-4 text-white text-xl placeholder-gray-400 focus:outline-none focus:ring-4 focus:ring-blue-500/50 focus:border-blue-500/50 transition-all duration-300"
+                  className="w-full input-field text-lg"
                   required
                 />
               </div>
 
               {error && (
-                <div className="bg-gradient-to-r from-red-900/50 to-red-800/50 backdrop-blur-sm border border-red-500/50 rounded-2xl p-6">
-                  <p className="text-red-300 text-lg">{error}</p>
+                <div className="bg-red-500/10 border border-red-500/50 rounded-xl p-4">
+                  <p className="text-red-300">{error}</p>
                 </div>
               )}
 
               <button
                 type="submit"
                 disabled={!groupId.trim() || !participantName.trim()}
-                className="w-full bg-gradient-to-r from-blue-500 to-cyan-500 hover:from-blue-600 hover:to-cyan-600 disabled:from-gray-600 disabled:to-gray-700 disabled:cursor-not-allowed text-white py-6 rounded-2xl font-bold text-xl flex items-center justify-center gap-4 transition-all duration-300 shadow-2xl shadow-blue-500/25 hover:shadow-blue-500/40 hover:transform hover:scale-105"
+                className="w-full btn-primary py-4 text-lg glow-green disabled:opacity-50 disabled:cursor-not-allowed"
               >
-                <Users className="w-6 h-6" />
                 Join Group
               </button>
             </form>
 
-            <div className="mt-12 p-8 bg-gradient-to-r from-gray-700/30 to-gray-800/30 backdrop-blur-sm rounded-2xl border border-gray-600/30">
-              <h3 className="text-white font-bold text-xl mb-4 flex items-center gap-2">
-                <Sparkles className="w-5 h-5" />
-                How to join:
+            <div className="mt-12 card-gradient p-6 rounded-2xl border border-green-500/20">
+              <h3 className="text-white font-semibold text-lg mb-4 flex items-center gap-2">
+                <Users className="w-5 h-5 text-green-400" />
+                How to join a group
               </h3>
-              <ul className="text-gray-300 space-y-3 text-lg">
-                <li className="flex items-center gap-3">
+              <div className="space-y-3 text-gray-300">
+                <div className="flex items-center gap-3">
+                  <div className="w-2 h-2 bg-green-400 rounded-full"></div>
+                  <span>Get the group ID from the group creator</span>
+                </div>
+                <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-blue-400 rounded-full"></div>
-                  Get the group link or ID from a group member
-                </li>
-                <li className="flex items-center gap-3">
+                  <span>Enter the 6-character group ID above</span>
+                </div>
+                <div className="flex items-center gap-3">
                   <div className="w-2 h-2 bg-purple-400 rounded-full"></div>
-                  Enter the 6-character group ID above
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-emerald-400 rounded-full"></div>
-                  Add your name and join the group
-                </li>
-                <li className="flex items-center gap-3">
-                  <div className="w-2 h-2 bg-orange-400 rounded-full"></div>
-                  Start splitting expenses with everyone!
-                </li>
-              </ul>
+                  <span>Add your name and join the group</span>
+                </div>
+              </div>
             </div>
           </div>
         </div>

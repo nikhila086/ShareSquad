@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Users, Plus, Calculator, ArrowLeft, Copy, Check, DollarSign, Receipt, TrendingUp } from 'lucide-react';
+import { Users, Plus, Calculator, ArrowLeft, Copy, Check, DollarSign, Receipt, TrendingUp, Sparkles, Star } from 'lucide-react';
 import CreateGroup from './components/CreateGroup';
 import JoinGroup from './components/JoinGroup';
 import GroupDashboard from './components/GroupDashboard';
@@ -196,55 +196,56 @@ function App() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 relative overflow-hidden">
-      {/* Animated background elements */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-emerald-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-pulse animation-delay-2000"></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-10 animate-pulse animation-delay-4000"></div>
+    <div className="min-h-screen gradient-bg relative overflow-hidden">
+      {/* Background decorations */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500/10 rounded-full blur-3xl"></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-96 h-96 bg-cyan-500/5 rounded-full blur-3xl"></div>
       </div>
 
-      <div className="container mx-auto px-4 py-8 relative z-10">
+      <div className="container mx-auto px-6 py-16 relative z-10">
         <div className="max-w-6xl mx-auto">
           {/* Header */}
-          <div className="text-center mb-16">
+          <div className="text-center mb-20">
             <div className="flex items-center justify-center mb-8">
-              <div className="bg-gradient-to-r from-emerald-500 to-teal-500 p-4 rounded-3xl mr-6 shadow-2xl shadow-emerald-500/25">
-                <Users className="w-12 h-12 text-white" />
+              <div className="bg-gradient-to-r from-blue-600 to-purple-600 p-4 rounded-2xl mr-6 float">
+                <DollarSign className="w-12 h-12 text-white" />
               </div>
-              <h1 className="text-7xl font-black text-transparent bg-clip-text bg-gradient-to-r from-white via-emerald-200 to-emerald-400">
+              <h1 className="text-6xl md:text-7xl font-bold text-gradient">
                 ShareSquad
               </h1>
             </div>
-            <p className="text-2xl text-gray-300 max-w-3xl mx-auto leading-relaxed font-light">
-              Split expenses effortlessly with friends. No signups, no hassle – just fair sharing made simple.
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+              Split expenses effortlessly with friends, family, and colleagues. 
+              Beautiful, simple, and always free.
             </p>
           </div>
 
           {/* Features Grid */}
           <div className="grid md:grid-cols-3 gap-8 mb-16">
-            <div className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-emerald-500/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-emerald-500/10">
-              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Plus className="w-8 h-8 text-white" />
+            <div className="card-gradient p-8 rounded-2xl hover-card">
+              <div className="bg-gradient-to-r from-blue-500 to-cyan-500 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+                <Plus className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Create Groups</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">Start a new expense group and invite friends with a shareable link.</p>
+              <h3 className="text-xl font-semibold text-white mb-4">Create Groups</h3>
+              <p className="text-gray-400 leading-relaxed">Start a new group instantly and invite friends with a simple link.</p>
             </div>
             
-            <div className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-purple-500/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-purple-500/10">
-              <div className="bg-gradient-to-r from-purple-500 to-pink-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <Receipt className="w-8 h-8 text-white" />
+            <div className="card-gradient p-8 rounded-2xl hover-card">
+              <div className="bg-gradient-to-r from-purple-500 to-pink-500 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+                <Receipt className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">Track Expenses</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">Add expenses and split them fairly among group members.</p>
+              <h3 className="text-xl font-semibold text-white mb-4">Track Expenses</h3>
+              <p className="text-gray-400 leading-relaxed">Add expenses and split them equally or with custom amounts.</p>
             </div>
             
-            <div className="group bg-gradient-to-br from-gray-800/50 to-gray-900/50 backdrop-blur-sm p-8 rounded-2xl border border-gray-700/50 hover:border-orange-500/50 transition-all duration-300 hover:transform hover:scale-105 hover:shadow-2xl hover:shadow-orange-500/10">
-              <div className="bg-gradient-to-r from-orange-500 to-red-500 w-16 h-16 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
-                <TrendingUp className="w-8 h-8 text-white" />
+            <div className="card-gradient p-8 rounded-2xl hover-card">
+              <div className="bg-gradient-to-r from-green-500 to-emerald-500 w-12 h-12 rounded-xl flex items-center justify-center mb-6">
+                <Calculator className="w-6 h-6 text-white" />
               </div>
-              <h3 className="text-2xl font-bold text-white mb-4">See Balances</h3>
-              <p className="text-gray-400 text-lg leading-relaxed">Instantly see who owes whom and settle up easily.</p>
+              <h3 className="text-xl font-semibold text-white mb-4">Smart Balances</h3>
+              <p className="text-gray-400 leading-relaxed">See who owes what with automatic calculations and settlement suggestions.</p>
             </div>
           </div>
 
@@ -252,43 +253,39 @@ function App() {
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
             <button
               onClick={() => setCurrentView('create')}
-              className="group bg-gradient-to-r from-emerald-500 to-teal-500 hover:from-emerald-600 hover:to-teal-600 text-white px-12 py-6 rounded-2xl font-bold text-xl flex items-center justify-center gap-4 transition-all duration-300 shadow-2xl shadow-emerald-500/25 hover:shadow-emerald-500/40 hover:transform hover:scale-105"
+              className="btn-primary glow-blue flex items-center justify-center gap-3 text-lg"
             >
-              <Plus className="w-6 h-6 group-hover:rotate-90 transition-transform duration-300" />
-              Create New Group
+              <Plus className="w-5 h-5" />
+              Create Group
             </button>
             
             <button
               onClick={() => setCurrentView('join')}
-              className="group bg-gradient-to-r from-gray-700 to-gray-800 hover:from-gray-600 hover:to-gray-700 text-white px-12 py-6 rounded-2xl font-bold text-xl flex items-center justify-center gap-4 transition-all duration-300 border border-gray-600 hover:border-gray-500 shadow-2xl hover:transform hover:scale-105"
+              className="btn-secondary flex items-center justify-center gap-3 text-lg"
             >
-              <Users className="w-6 h-6 group-hover:scale-110 transition-transform duration-300" />
-              Join Existing Group
+              <Users className="w-5 h-5" />
+              Join Group
             </button>
           </div>
 
-          {/* Stats Section */}
+          {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-16">
-            <div className="text-center">
-              <div className="text-5xl font-black text-emerald-400 mb-2">∞</div>
-              <div className="text-gray-300 text-lg">Groups Created</div>
+            <div className="text-center card-gradient p-8 rounded-2xl">
+              <div className="text-3xl font-bold text-white mb-2">Simple</div>
+              <div className="text-gray-400">No signup required</div>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-black text-purple-400 mb-2">0</div>
-              <div className="text-gray-300 text-lg">Signups Required</div>
+            <div className="text-center card-gradient p-8 rounded-2xl">
+              <div className="text-3xl font-bold text-white mb-2">Fast</div>
+              <div className="text-gray-400">Create groups instantly</div>
             </div>
-            <div className="text-center">
-              <div className="text-5xl font-black text-blue-400 mb-2">100%</div>
-              <div className="text-gray-300 text-lg">Fair Splitting</div>
+            <div className="text-center card-gradient p-8 rounded-2xl">
+              <div className="text-3xl font-bold text-white mb-2">Free</div>
+              <div className="text-gray-400">Always and forever</div>
             </div>
           </div>
 
           {/* Footer */}
-          <div className="text-center pt-12 border-t border-gray-700/50">
-            <p className="text-gray-500 text-lg">
-              No accounts needed • Data stays on your device • Share and split with ease
-            </p>
-          </div>
+          
         </div>
       </div>
     </div>

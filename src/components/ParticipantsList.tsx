@@ -68,8 +68,8 @@ export default function ParticipantsList({ group, currentUser, onUpdateGroup }: 
   };
 
   return (
-    <div className="bg-gray-800 rounded-xl border border-gray-700">
-      <div className="p-6 border-b border-gray-700">
+    <div className="card-gradient rounded-2xl">
+      <div className="p-6 border-b border-white/10">
         <div className="flex items-center justify-between">
           <h2 className="text-xl font-semibold text-white flex items-center gap-2">
             <Users className="w-5 h-5" />
@@ -78,7 +78,7 @@ export default function ParticipantsList({ group, currentUser, onUpdateGroup }: 
           
           <button
             onClick={() => setShowAddForm(true)}
-            className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium flex items-center gap-2 transition-colors"
+            className="btn-primary flex items-center gap-2"
           >
             <Plus className="w-4 h-4" />
             Add Member
@@ -89,7 +89,7 @@ export default function ParticipantsList({ group, currentUser, onUpdateGroup }: 
       <div className="p-6">
         {/* Add Participant Form */}
         {showAddForm && (
-          <form onSubmit={handleAddParticipant} className="mb-6 p-4 bg-gray-700 rounded-xl border border-gray-600">
+          <form onSubmit={handleAddParticipant} className="mb-6 card-gradient p-4 rounded-xl border border-white/10">
             <h3 className="text-white font-medium mb-3">Add New Member</h3>
             <div className="flex gap-3">
               <input
@@ -97,13 +97,13 @@ export default function ParticipantsList({ group, currentUser, onUpdateGroup }: 
                 value={newParticipantName}
                 onChange={(e) => setNewParticipantName(e.target.value)}
                 placeholder="Enter participant name"
-                className="flex-1 bg-gray-600 border border-gray-500 rounded-lg px-3 py-2 text-white placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:border-transparent"
+                className="flex-1 input-field"
                 autoFocus
                 required
               />
               <button
                 type="submit"
-                className="bg-emerald-500 hover:bg-emerald-600 text-white px-4 py-2 rounded-lg font-medium transition-colors"
+                className="btn-primary"
               >
                 Add
               </button>
@@ -113,7 +113,7 @@ export default function ParticipantsList({ group, currentUser, onUpdateGroup }: 
                   setShowAddForm(false);
                   setNewParticipantName('');
                 }}
-                className="bg-gray-600 hover:bg-gray-500 text-white px-4 py-2 rounded-lg transition-colors"
+                className="btn-secondary"
               >
                 Cancel
               </button>
@@ -134,7 +134,7 @@ export default function ParticipantsList({ group, currentUser, onUpdateGroup }: 
               <div
                 key={participant.id}
                 className={`flex items-center justify-between p-4 rounded-xl ${
-                  isCurrentUser ? 'bg-emerald-500/10 border border-emerald-500/20' : 'bg-gray-700'
+                  isCurrentUser ? 'bg-emerald-500/10 border border-emerald-500/20' : 'bg-white/5'
                 }`}
               >
                 <div className="flex items-center gap-3">
